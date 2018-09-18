@@ -2,12 +2,12 @@
 A course to build one's own blockchain. It's meant to be a learning exercise to understand the concepts of a blockchain.
 
 It's to take us through certain concepts such as:-
-a) How a block looks
-b) How to broadcast some blocks
-c) How to build a chain
-d) Check basic validity conditions
-e) Check out nodes
-f) Broadcast node communication
+* How a block looks
+* How to broadcast some blocks
+* How to build a chain
+* Check basic validity conditions
+* Check out nodes
+* Broadcast node communication
 
 We use python because :-
 * It is easy for me
