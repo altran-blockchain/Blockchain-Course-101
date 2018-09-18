@@ -1,13 +1,11 @@
-# TODO: type solution here
-from Session1_Fundamentals.block_basics.simpleblock import SimpleBlock
-
-
 # lets read some blocks and do something on it
+
+from Session1_Fundamentals.block_basics.task import SimpleBlock
 import json, os
 
 
 def sync_local(cls=SimpleBlock, chaindata_dir='chaindata'):
-    node_blocks = []
+    node_blocks = list()
     if not os.path.isabs(chaindata_dir):
         folder_here =os.path.dirname(os.path.realpath(__file__))
         chaindata_dir = os.path.join(folder_here, chaindata_dir)
@@ -30,12 +28,16 @@ def sync_local(cls=SimpleBlock, chaindata_dir='chaindata'):
 
     return node_blocks
 
-def sync(cls=SimpleBlock, chaindata_dir='chaindata'):
+def sync(cls=SimpleBlock, chaindata_dir=None):
+    if chaindata_dir is None:
+        chaindata_dir = os.path.join("..", "chaindata")
     return sync_local(
         cls=cls,
         chaindata_dir=chaindata_dir
     )
 
 if __name__ == '__main__':
-    peer_nodes = sync(cls=SimpleBlock)
+    folder_chaindata = os.path.join("..", "chaindata")
+    peer_nodes = sync(chaindata_dir=folder_chaindata,
+                      cls=SimpleBlock)
     print peer_nodes

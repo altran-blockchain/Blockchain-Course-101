@@ -1,4 +1,3 @@
-# TODO: type solution here
 from Session1_Fundamentals.block_syncing.task import sync
 from flask import Flask
 import pprint

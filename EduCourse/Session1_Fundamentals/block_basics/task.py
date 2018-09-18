@@ -50,12 +50,12 @@ class SimpleBlock(object):
         :return:
         """
         return {
-            "index" : What is my index,
-            "timestamp": What is my timestamp,
-            "prev_hash": What is the previous block hash,
-            "data": What is my data,
-            "hash": What is my current hash,
-            "nonce": What is the nonce that is stored,
+            "index" : self.index,
+            "timestamp": self.timestamp,
+            "prev_hash": self.prev_hash,
+            "data": self.data,
+            "hash": self.hash,
+            "nonce": self.nonce,
         }
 
     @property
@@ -135,7 +135,7 @@ def prepare_folder(folder_chaindata="chaindata"):
         folder_chaindata_abs = folder_chaindata
     else:
         folder_here =os.path.dirname(os.path.realpath(__file__))
-        folder_chaindata_abs = os.path.join(folder_here, folder_chaindata)
+        folder_chaindata_abs = os.path.join(folder_here, "..", folder_chaindata)
 
     print "Going to make the chaindata here", folder_chaindata_abs
     if not os.path.exists(folder_chaindata_abs):
@@ -143,7 +143,7 @@ def prepare_folder(folder_chaindata="chaindata"):
 
 if __name__ == '__main__':
     # Some tests
-    prepare_folder('chaindata')
+    prepare_folder(os.path.join("..",'chaindata'))
     test_block = SimpleBlock(
         index=0,
         data="MY first block, woohoo",
@@ -151,4 +151,4 @@ if __name__ == '__main__':
     )
 
     print test_block.block
-    test_block.save(test_block.block, "chaindata")
+    test_block.save(test_block.block, os.path.join("..","chaindata"))

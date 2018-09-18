@@ -21,7 +21,7 @@
           <option name="customPresentableName" />
           <option name="description" value="This course helps you create a blockchain. This would serve as an exercise to understand blockchains in a hands on fashion&#10;We'd be covering&#10;a) Blocks&#10;b) Read/Write blocks&#10;c) View it using a micro web service&#10;d) Implement mining with the proof-of-work methodology&#10;e) Upgrade to blockchains&#10;f) Construct a node&#10;g) [WIP] transactions" />
           <option name="index" value="-1" />
-          <option name="language" value="Python" />
+          <option name="language" value="Python 2.7" />
           <option name="languageCode" value="en" />
           <option name="name" value="Blockchain-101" />
           <option name="stepikChangeStatus" value="Up to date" />
@@ -31,7 +31,7 @@
                 <option name="customPresentableName" />
                 <option name="id" value="0" />
                 <option name="index" value="1" />
-                <option name="name" value="lesson1" />
+                <option name="name" value="Session1_Fundamentals" />
                 <option name="stepikChangeStatus" value="Up to date" />
                 <option name="updateDate" value="0" />
                 <option name="taskList">
@@ -42,7 +42,7 @@
                       </option>
                       <option name="customPresentableName" />
                       <option name="descriptionFormat" value="HTML" />
-                      <option name="descriptionText" value="&lt;html&gt;&#10;Write your task text here.&#10;&lt;br&gt;&#10;&lt;/html&gt;" />
+                      <option name="descriptionText" value="&lt;html&gt;&#10;Let's see how a simple block looks - pythonically&lt;br /&gt;&#10;A block usually consists of the following :- &lt;br /&gt;&#10;&lt;ul&gt;&#10;    &lt;li&gt;&#10;        &lt;b&gt;Some data&lt;/b&gt; : In bitcoin, this is a message you can write along with your transaction &lt;br /&gt;&#10;        For example : &quot;Home rent&quot; , &quot;Pizza&quot;&#10;    &lt;/li&gt;&#10;    &lt;li&gt;&#10;        &lt;b&gt; Hash of the previous block&lt;/b&gt; This is very important. This is what connects the blocks and says which&#10;        one is after which one. &lt;i&gt;The only exception is the genesis block, i.e the first block&lt;/i&gt;&#10;    &lt;/li&gt;&#10;    &lt;li&gt;&#10;        &lt;b&gt;TimeStamp&lt;/b&gt; This allows you to decide which block was mined earlier. If two blocks were mined together,&#10;        the one that was mined earlier is accepted&#10;    &lt;/li&gt;&#10;    &lt;li&gt;&#10;        &lt;b&gt;Other Data&lt;/b&gt; Which include the index, nonce, and other stuff. We will come back to this later&#10;    &lt;/li&gt;&#10;&lt;/ul&gt;&#10;&#10;&#10;&lt;/html&gt;&#10;" />
                       <option name="feedbackLink">
                         <FeedbackLink>
                           <option name="link" />
@@ -50,8 +50,8 @@
                         </FeedbackLink>
                       </option>
                       <option name="index" value="1" />
-                      <option name="name" value="task1" />
-                      <option name="status" value="Unchecked" />
+                      <option name="name" value="block_basics" />
+                      <option name="status" value="Solved" />
                       <option name="stepId" value="0" />
                       <option name="stepikChangeStatus" value="Up to date" />
                       <option name="testsText">
@@ -66,9 +66,582 @@
                             <value>
                               <TaskFile>
                                 <option name="answerPlaceholders">
+                                  <list>
+                                    <AnswerPlaceholder>
+                                      <option name="hints">
+                                        <list>
+                                          <option value="look at self.something" />
+                                        </list>
+                                      </option>
+                                      <option name="index" value="0" />
+                                      <option name="initialState" />
+                                      <option name="initializedFromDependency" value="false" />
+                                      <option name="length" value="20" />
+                                      <option name="offset" value="1431" />
+                                      <option name="placeholderDependency" />
+                                      <option name="placeholderText" value="Type some index here" />
+                                      <option name="possibleAnswer" value="self.index" />
+                                      <option name="selected" value="false" />
+                                      <option name="status" value="Solved" />
+                                      <option name="studentAnswer" />
+                                      <option name="useLength" value="false" />
+                                    </AnswerPlaceholder>
+                                    <AnswerPlaceholder>
+                                      <option name="hints">
+                                        <list />
+                                      </option>
+                                      <option name="index" value="1" />
+                                      <option name="initialState" />
+                                      <option name="initializedFromDependency" value="false" />
+                                      <option name="length" value="20" />
+                                      <option name="offset" value="1468" />
+                                      <option name="placeholderDependency" />
+                                      <option name="placeholderText" value="What is my timestamp" />
+                                      <option name="possibleAnswer" value="self.timestamp" />
+                                      <option name="selected" value="false" />
+                                      <option name="status" value="Solved" />
+                                      <option name="studentAnswer" />
+                                      <option name="useLength" value="false" />
+                                    </AnswerPlaceholder>
+                                    <AnswerPlaceholder>
+                                      <option name="hints">
+                                        <list />
+                                      </option>
+                                      <option name="index" value="2" />
+                                      <option name="initialState" />
+                                      <option name="initializedFromDependency" value="false" />
+                                      <option name="length" value="31" />
+                                      <option name="offset" value="1509" />
+                                      <option name="placeholderDependency" />
+                                      <option name="placeholderText" value="What is the previous block hash" />
+                                      <option name="possibleAnswer" value="self.prev_hash" />
+                                      <option name="selected" value="false" />
+                                      <option name="status" value="Solved" />
+                                      <option name="studentAnswer" />
+                                      <option name="useLength" value="false" />
+                                    </AnswerPlaceholder>
+                                    <AnswerPlaceholder>
+                                      <option name="hints">
+                                        <list />
+                                      </option>
+                                      <option name="index" value="3" />
+                                      <option name="initialState" />
+                                      <option name="initializedFromDependency" value="false" />
+                                      <option name="length" value="15" />
+                                      <option name="offset" value="1545" />
+                                      <option name="placeholderDependency" />
+                                      <option name="placeholderText" value="What is my data" />
+                                      <option name="possibleAnswer" value="self.data" />
+                                      <option name="selected" value="false" />
+                                      <option name="status" value="Solved" />
+                                      <option name="studentAnswer" />
+                                      <option name="useLength" value="false" />
+                                    </AnswerPlaceholder>
+                                    <AnswerPlaceholder>
+                                      <option name="hints">
+                                        <list />
+                                      </option>
+                                      <option name="index" value="4" />
+                                      <option name="initialState" />
+                                      <option name="initializedFromDependency" value="false" />
+                                      <option name="length" value="23" />
+                                      <option name="offset" value="1576" />
+                                      <option name="placeholderDependency" />
+                                      <option name="placeholderText" value="What is my current_hash" />
+                                      <option name="possibleAnswer" value="self.hash" />
+                                      <option name="selected" value="false" />
+                                      <option name="status" value="Solved" />
+                                      <option name="studentAnswer" />
+                                      <option name="useLength" value="false" />
+                                    </AnswerPlaceholder>
+                                    <AnswerPlaceholder>
+                                      <option name="hints">
+                                        <list />
+                                      </option>
+                                      <option name="index" value="5" />
+                                      <option name="initialState" />
+                                      <option name="initializedFromDependency" value="false" />
+                                      <option name="length" value="16" />
+                                      <option name="offset" value="1608" />
+                                      <option name="placeholderDependency" />
+                                      <option name="placeholderText" value="what is my nonce" />
+                                      <option name="possibleAnswer" value="self.nonce" />
+                                      <option name="selected" value="false" />
+                                      <option name="status" value="Solved" />
+                                      <option name="studentAnswer" />
+                                      <option name="useLength" value="false" />
+                                    </AnswerPlaceholder>
+                                    <AnswerPlaceholder>
+                                      <option name="hints">
+                                        <list>
+                                          <option value="test_block.something" />
+                                        </list>
+                                      </option>
+                                      <option name="index" value="6" />
+                                      <option name="initialState" />
+                                      <option name="initializedFromDependency" value="false" />
+                                      <option name="length" value="22" />
+                                      <option name="offset" value="4504" />
+                                      <option name="placeholderDependency" />
+                                      <option name="placeholderText" value="contents of test_block" />
+                                      <option name="possibleAnswer" value="test_block.block" />
+                                      <option name="selected" value="false" />
+                                      <option name="status" value="Solved" />
+                                      <option name="studentAnswer" />
+                                      <option name="useLength" value="false" />
+                                    </AnswerPlaceholder>
+                                  </list>
+                                </option>
+                                <option name="highlightErrors" value="true" />
+                                <option name="trackChanges" value="true" />
+                                <option name="trackLengths" value="true" />
+                                <option name="userCreated" value="false" />
+                                <option name="name" value="task.py" />
+                                <option name="text" value="# TODO: type solution here&#10;" />
+                              </TaskFile>
+                            </value>
+                          </entry>
+                        </map>
+                      </option>
+                    </EduTask>
+                    <EduTask>
+                      <option name="additionalFiles">
+                        <map />
+                      </option>
+                      <option name="customPresentableName" />
+                      <option name="descriptionFormat" value="HTML" />
+                      <option name="descriptionText" value="&lt;html&gt;&#10;Here, we will learn how to load the blocks &lt;br /&gt;&#10;And use whatever functions from simple blocks&#10;&lt;br /&gt;&#10;Couple of salient points here (that you should think about) :- &lt;br /&gt;&#10;&lt;ol&gt;&#10;    &lt;li&gt;Why are we passing cls? Wouldn't it make sense to just pass SimpleBlock&lt;/li&gt;&#10;    &lt;li&gt;How do we check if a node is valid?&lt;/li&gt;&#10;    &lt;li&gt;How are our nodes collected?&lt;/li&gt;&#10;&lt;/ol&gt;&#10;&#10;&lt;br&gt;&#10;&lt;/html&gt;&#10;" />
+                      <option name="feedbackLink">
+                        <FeedbackLink>
+                          <option name="link" />
+                          <option name="type" value="STEPIK" />
+                        </FeedbackLink>
+                      </option>
+                      <option name="index" value="2" />
+                      <option name="name" value="block_syncing" />
+                      <option name="status" value="Failed" />
+                      <option name="stepId" value="0" />
+                      <option name="stepikChangeStatus" value="Up to date" />
+                      <option name="testsText">
+                        <map>
+                          <entry key="tests.py" value="from test_helper import run_common_tests, failed, passed, get_answer_placeholders&#10;&#10;&#10;def test_answer_placeholders():&#10;    placeholders = get_answer_placeholders()&#10;    placeholder = placeholders[0]&#10;    if placeholder == &quot;&quot;:       # TODO: your condition here&#10;        passed()&#10;    else:&#10;        failed()&#10;&#10;&#10;if __name__ == '__main__':&#10;    run_common_tests()&#10;    # test_answer_placeholders()       # TODO: uncomment test call&#10;&#10;&#10;" />
+                        </map>
+                      </option>
+                      <option name="updateDate" value="0" />
+                      <option name="taskFiles">
+                        <map>
+                          <entry key="task.py">
+                            <value>
+                              <TaskFile>
+                                <option name="answerPlaceholders">
+                                  <list>
+                                    <AnswerPlaceholder>
+                                      <option name="hints">
+                                        <list>
+                                          <option value="Something that we don't have to predefine the length. &#10;Something we can add data to, like blocks&#10;Something we can iterate over, block by block" />
+                                        </list>
+                                      </option>
+                                      <option name="index" value="0" />
+                                      <option name="initialState" />
+                                      <option name="initializedFromDependency" value="false" />
+                                      <option name="length" value="52" />
+                                      <option name="offset" value="208" />
+                                      <option name="placeholderDependency" />
+                                      <option name="placeholderText" value="What kind of data structure do we want this to have?" />
+                                      <option name="possibleAnswer" value="list()" />
+                                      <option name="selected" value="false" />
+                                      <option name="status" value="Failed" />
+                                      <option name="studentAnswer" />
+                                      <option name="useLength" value="false" />
+                                    </AnswerPlaceholder>
+                                    <AnswerPlaceholder>
+                                      <option name="hints">
+                                        <list>
+                                          <option value="You modified this function in the last task" />
+                                        </list>
+                                      </option>
+                                      <option name="index" value="1" />
+                                      <option name="initialState" />
+                                      <option name="initializedFromDependency" value="false" />
+                                      <option name="length" value="64" />
+                                      <option name="offset" value="791" />
+                                      <option name="placeholderDependency" />
+                                      <option name="placeholderText" value="We've got the data in a dict from a json. Now load it as a block" />
+                                      <option name="possibleAnswer" value="load_from_dict(block_dict)" />
+                                      <option name="selected" value="false" />
+                                      <option name="status" value="Failed" />
+                                      <option name="studentAnswer" />
+                                      <option name="useLength" value="false" />
+                                    </AnswerPlaceholder>
+                                    <AnswerPlaceholder>
+                                      <option name="hints">
+                                        <list>
+                                          <option value="How do I check if the current block is a valid block?" />
+                                        </list>
+                                      </option>
+                                      <option name="index" value="2" />
+                                      <option name="initialState" />
+                                      <option name="initializedFromDependency" value="false" />
+                                      <option name="length" value="17" />
+                                      <option name="offset" value="894" />
+                                      <option name="placeholderDependency" />
+                                      <option name="placeholderText" value="to_check_validity" />
+                                      <option name="possibleAnswer" value="is_valid(cur_block)" />
+                                      <option name="selected" value="false" />
+                                      <option name="status" value="Failed" />
+                                      <option name="studentAnswer" />
+                                      <option name="useLength" value="false" />
+                                    </AnswerPlaceholder>
+                                    <AnswerPlaceholder>
+                                      <option name="hints">
+                                        <list>
+                                          <option value="in c++ it's push_back,&#10;in python it is ..." />
+                                        </list>
+                                      </option>
+                                      <option name="index" value="3" />
+                                      <option name="initialState" />
+                                      <option name="initializedFromDependency" value="false" />
+                                      <option name="length" value="45" />
+                                      <option name="offset" value="947" />
+                                      <option name="placeholderDependency" />
+                                      <option name="placeholderText" value="Now add this block to our container of blocks" />
+                                      <option name="possibleAnswer" value="append(cur_block)" />
+                                      <option name="selected" value="false" />
+                                      <option name="status" value="Failed" />
+                                      <option name="studentAnswer" />
+                                      <option name="useLength" value="false" />
+                                    </AnswerPlaceholder>
+                                  </list>
+                                </option>
+                                <option name="highlightErrors" value="true" />
+                                <option name="trackChanges" value="true" />
+                                <option name="trackLengths" value="true" />
+                                <option name="userCreated" value="false" />
+                                <option name="name" value="task.py" />
+                                <option name="text" value="# TODO: type solution here&#10;" />
+                              </TaskFile>
+                            </value>
+                          </entry>
+                        </map>
+                      </option>
+                    </EduTask>
+                    <EduTask>
+                      <option name="additionalFiles">
+                        <map />
+                      </option>
+                      <option name="customPresentableName" />
+                      <option name="descriptionFormat" value="HTML" />
+                      <option name="descriptionText" value="&lt;html&gt;&#10;This task broadcasts everything in the chaindata folder&#10;&lt;br&gt;&#10;We use the &lt;b&gt;Flask&lt;/b&gt; Library to just hit up a very lightweight microservice.&#10;&lt;br&gt;&#10;We then load everything in the chaindata folder and serve it to a localhost:5000/blockchain&#10;&lt;/html&gt;&#10;" />
+                      <option name="feedbackLink">
+                        <FeedbackLink>
+                          <option name="link" />
+                          <option name="type" value="STEPIK" />
+                        </FeedbackLink>
+                      </option>
+                      <option name="index" value="3" />
+                      <option name="name" value="block_broadcast" />
+                      <option name="status" value="Unchecked" />
+                      <option name="stepId" value="0" />
+                      <option name="stepikChangeStatus" value="Up to date" />
+                      <option name="testsText">
+                        <map>
+                          <entry key="tests.py" value="from test_helper import run_common_tests, failed, passed, get_answer_placeholders&#10;&#10;&#10;def test_answer_placeholders():&#10;    placeholders = get_answer_placeholders()&#10;    placeholder = placeholders[0]&#10;    if placeholder == &quot;&quot;:       # TODO: your condition here&#10;        passed()&#10;    else:&#10;        failed()&#10;&#10;&#10;if __name__ == '__main__':&#10;    run_common_tests()&#10;    # test_answer_placeholders()       # TODO: uncomment test call&#10;&#10;&#10;" />
+                        </map>
+                      </option>
+                      <option name="updateDate" value="0" />
+                      <option name="taskFiles">
+                        <map>
+                          <entry key="__init__.py">
+                            <value>
+                              <TaskFile>
+                                <option name="answerPlaceholders">
                                   <list />
                                 </option>
                                 <option name="highlightErrors" value="false" />
+                                <option name="trackChanges" value="true" />
+                                <option name="trackLengths" value="true" />
+                                <option name="userCreated" value="false" />
+                                <option name="name" value="__init__.py" />
+                                <option name="text" />
+                              </TaskFile>
+                            </value>
+                          </entry>
+                          <entry key="task.py">
+                            <value>
+                              <TaskFile>
+                                <option name="answerPlaceholders">
+                                  <list>
+                                    <AnswerPlaceholder>
+                                      <option name="hints">
+                                        <list>
+                                          <option value="We've imported something. &#10;Pass with no parameters please xd" />
+                                        </list>
+                                      </option>
+                                      <option name="index" value="0" />
+                                      <option name="initialState" />
+                                      <option name="initializedFromDependency" value="false" />
+                                      <option name="length" value="27" />
+                                      <option name="offset" value="336" />
+                                      <option name="placeholderDependency" />
+                                      <option name="placeholderText" value="how do I get my node blocks" />
+                                      <option name="possibleAnswer" value="sync()" />
+                                      <option name="selected" value="false" />
+                                      <option name="status" value="Unchecked" />
+                                      <option name="studentAnswer" />
+                                      <option name="useLength" value="false" />
+                                    </AnswerPlaceholder>
+                                    <AnswerPlaceholder>
+                                      <option name="hints">
+                                        <list>
+                                          <option value="We use a dict this time, just for fun&#10;Also easier to serialize a dict in python because it's already json-ish" />
+                                        </list>
+                                      </option>
+                                      <option name="index" value="1" />
+                                      <option name="initialState" />
+                                      <option name="initializedFromDependency" value="false" />
+                                      <option name="length" value="42" />
+                                      <option name="offset" value="469" />
+                                      <option name="placeholderDependency" />
+                                      <option name="placeholderText" value="let's index our node_blocks by block index" />
+                                      <option name="possibleAnswer" value="block.index" />
+                                      <option name="selected" value="false" />
+                                      <option name="status" value="Unchecked" />
+                                      <option name="studentAnswer" />
+                                      <option name="useLength" value="false" />
+                                    </AnswerPlaceholder>
+                                  </list>
+                                </option>
+                                <option name="highlightErrors" value="true" />
+                                <option name="trackChanges" value="true" />
+                                <option name="trackLengths" value="true" />
+                                <option name="userCreated" value="false" />
+                                <option name="name" value="task.py" />
+                                <option name="text" value="# TODO: type solution here&#10;" />
+                              </TaskFile>
+                            </value>
+                          </entry>
+                        </map>
+                      </option>
+                    </EduTask>
+                    <EduTask>
+                      <option name="additionalFiles">
+                        <map />
+                      </option>
+                      <option name="customPresentableName" />
+                      <option name="descriptionFormat" value="HTML" />
+                      <option name="descriptionText" value="&lt;html&gt;&#10;Here, we try to do the actual mining &lt;br&gt;&#10;We use a proof-of-work mechanism &lt;br&gt;&#10;It works by taking a block and hashing it :-&#10;&lt;ol&gt;&#10;    &lt;li&gt; We use the SHA256 algorithm&lt;/li&gt;&#10;    &lt;li&gt; We need to get the hash as a string&lt;/li&gt;&#10;    &lt;li&gt; We check if this hash string has 4 zeros in the beginning&lt;/li&gt;&#10;    &lt;li&gt; if conditions are met, it is a valid block&lt;/li&gt;&#10;    &lt;li&gt; if not, we increment the nonce and try again, till infinity and beyond!&lt;/li&gt;&#10;&lt;/ol&gt;&#10;&lt;/html&gt;&#10;" />
+                      <option name="feedbackLink">
+                        <FeedbackLink>
+                          <option name="link" />
+                          <option name="type" value="STEPIK" />
+                        </FeedbackLink>
+                      </option>
+                      <option name="index" value="4" />
+                      <option name="name" value="block_mining" />
+                      <option name="status" value="Unchecked" />
+                      <option name="stepId" value="0" />
+                      <option name="stepikChangeStatus" value="Up to date" />
+                      <option name="testsText">
+                        <map>
+                          <entry key="tests.py" value="from test_helper import run_common_tests, failed, passed, get_answer_placeholders&#10;&#10;&#10;def test_answer_placeholders():&#10;    placeholders = get_answer_placeholders()&#10;    placeholder = placeholders[0]&#10;    if placeholder == &quot;&quot;:       # TODO: your condition here&#10;        passed()&#10;    else:&#10;        failed()&#10;&#10;&#10;if __name__ == '__main__':&#10;    run_common_tests()&#10;    # test_answer_placeholders()       # TODO: uncomment test call&#10;&#10;&#10;" />
+                        </map>
+                      </option>
+                      <option name="updateDate" value="0" />
+                      <option name="taskFiles">
+                        <map>
+                          <entry key="__init__.py">
+                            <value>
+                              <TaskFile>
+                                <option name="answerPlaceholders">
+                                  <list />
+                                </option>
+                                <option name="highlightErrors" value="false" />
+                                <option name="trackChanges" value="true" />
+                                <option name="trackLengths" value="true" />
+                                <option name="userCreated" value="false" />
+                                <option name="name" value="__init__.py" />
+                                <option name="text" />
+                              </TaskFile>
+                            </value>
+                          </entry>
+                          <entry key="task.py">
+                            <value>
+                              <TaskFile>
+                                <option name="answerPlaceholders">
+                                  <list>
+                                    <AnswerPlaceholder>
+                                      <option name="hints">
+                                        <list>
+                                          <option value="Got to digest the hash ;)" />
+                                        </list>
+                                      </option>
+                                      <option name="index" value="0" />
+                                      <option name="initialState" />
+                                      <option name="initializedFromDependency" value="false" />
+                                      <option name="length" value="43" />
+                                      <option name="offset" value="1238" />
+                                      <option name="placeholderDependency" />
+                                      <option name="placeholderText" value="You got to return the hash in string format" />
+                                      <option name="possibleAnswer" value="sha_obj.hexdigest()" />
+                                      <option name="selected" value="false" />
+                                      <option name="status" value="Unchecked" />
+                                      <option name="studentAnswer" />
+                                      <option name="useLength" value="false" />
+                                    </AnswerPlaceholder>
+                                    <AnswerPlaceholder>
+                                      <option name="hints">
+                                        <list>
+                                          <option value="important to pass the nonce param" />
+                                        </list>
+                                      </option>
+                                      <option name="index" value="1" />
+                                      <option name="initialState" />
+                                      <option name="initializedFromDependency" value="false" />
+                                      <option name="length" value="31" />
+                                      <option name="offset" value="1548" />
+                                      <option name="placeholderDependency" />
+                                      <option name="placeholderText" value="calculate the hash of the block" />
+                                      <option name="possibleAnswer" value="calculate_hash(block.nonce)" />
+                                      <option name="selected" value="false" />
+                                      <option name="status" value="Unchecked" />
+                                      <option name="studentAnswer" />
+                                      <option name="useLength" value="false" />
+                                    </AnswerPlaceholder>
+                                    <AnswerPlaceholder>
+                                      <option name="hints">
+                                        <list>
+                                          <option value="You can do this in many ways.&#10;Forgive me for testing just one kind of way" />
+                                        </list>
+                                      </option>
+                                      <option name="index" value="2" />
+                                      <option name="initialState" />
+                                      <option name="initializedFromDependency" value="false" />
+                                      <option name="length" value="51" />
+                                      <option name="offset" value="1800" />
+                                      <option name="placeholderDependency" />
+                                      <option name="placeholderText" value="Check if the first four elements of the hash are 0s" />
+                                      <option name="possibleAnswer" value="str(hash_to_check)[0:NUM_ZEROS] == '0'*NUM_ZEROS" />
+                                      <option name="selected" value="false" />
+                                      <option name="status" value="Unchecked" />
+                                      <option name="studentAnswer" />
+                                      <option name="useLength" value="false" />
+                                    </AnswerPlaceholder>
+                                    <AnswerPlaceholder>
+                                      <option name="hints">
+                                        <list>
+                                          <option value="you know it" />
+                                        </list>
+                                      </option>
+                                      <option name="index" value="3" />
+                                      <option name="initialState" />
+                                      <option name="initializedFromDependency" value="false" />
+                                      <option name="length" value="47" />
+                                      <option name="offset" value="2717" />
+                                      <option name="placeholderDependency" />
+                                      <option name="placeholderText" value="some_function_to_check_if_difficulty_is_alright" />
+                                      <option name="possibleAnswer" value="difficulty_condition" />
+                                      <option name="selected" value="false" />
+                                      <option name="status" value="Unchecked" />
+                                      <option name="studentAnswer" />
+                                      <option name="useLength" value="false" />
+                                    </AnswerPlaceholder>
+                                  </list>
+                                </option>
+                                <option name="highlightErrors" value="true" />
+                                <option name="trackChanges" value="true" />
+                                <option name="trackLengths" value="true" />
+                                <option name="userCreated" value="false" />
+                                <option name="name" value="task.py" />
+                                <option name="text" value="# TODO: type solution here&#10;" />
+                              </TaskFile>
+                            </value>
+                          </entry>
+                        </map>
+                      </option>
+                    </EduTask>
+                    <EduTask>
+                      <option name="additionalFiles">
+                        <map />
+                      </option>
+                      <option name="customPresentableName" />
+                      <option name="descriptionFormat" value="HTML" />
+                      <option name="descriptionText" value="&lt;html&gt;&#10;Here we build a blockchain with all the building-blocks we have made&lt;br&gt;&#10;The blockchain is basically a list with some helper functions to make it easier to access it&lt;br&gt;&#10;We only load blocks whose hashes make sense, otherwise we would be loading  abunch of garbage too &lt;br&gt;&#10;We should have more checks here, but its a perfect place to start!&#10;&lt;br&gt;&#10;&lt;br&gt;&#10;&#10;I would strongly suggest you to play around with this class&#10;&lt;ol&gt;&#10;    &lt;li&gt;explore your chaindata folder&lt;/li&gt;&#10;    &lt;li&gt;Delete some blocks and see what happens&lt;/li&gt;&#10;    &lt;li&gt;Can we use this class to make the first block?&lt;/li&gt;&#10;    &lt;li&gt;Go back to task 3 --&gt; broadcasting and see what happens in your browser!&lt;/li&gt;&#10;&lt;/ol&gt;,&#10;&lt;/html&gt;&#10;" />
+                      <option name="feedbackLink">
+                        <FeedbackLink>
+                          <option name="link" />
+                          <option name="type" value="STEPIK" />
+                        </FeedbackLink>
+                      </option>
+                      <option name="index" value="5" />
+                      <option name="name" value="blockchain" />
+                      <option name="status" value="Unchecked" />
+                      <option name="stepId" value="0" />
+                      <option name="stepikChangeStatus" value="Up to date" />
+                      <option name="testsText">
+                        <map>
+                          <entry key="tests.py" value="from test_helper import run_common_tests, failed, passed, get_answer_placeholders&#10;&#10;&#10;def test_answer_placeholders():&#10;    placeholders = get_answer_placeholders()&#10;    placeholder = placeholders[0]&#10;    if placeholder == &quot;&quot;:       # TODO: your condition here&#10;        passed()&#10;    else:&#10;        failed()&#10;&#10;&#10;if __name__ == '__main__':&#10;    run_common_tests()&#10;    # test_answer_placeholders()       # TODO: uncomment test call&#10;&#10;&#10;" />
+                        </map>
+                      </option>
+                      <option name="updateDate" value="0" />
+                      <option name="taskFiles">
+                        <map>
+                          <entry key="__init__.py">
+                            <value>
+                              <TaskFile>
+                                <option name="answerPlaceholders">
+                                  <list />
+                                </option>
+                                <option name="highlightErrors" value="false" />
+                                <option name="trackChanges" value="true" />
+                                <option name="trackLengths" value="true" />
+                                <option name="userCreated" value="false" />
+                                <option name="name" value="__init__.py" />
+                                <option name="text" />
+                              </TaskFile>
+                            </value>
+                          </entry>
+                          <entry key="task.py">
+                            <value>
+                              <TaskFile>
+                                <option name="answerPlaceholders">
+                                  <list>
+                                    <AnswerPlaceholder>
+                                      <option name="hints">
+                                        <list />
+                                      </option>
+                                      <option name="index" value="0" />
+                                      <option name="initialState" />
+                                      <option name="initializedFromDependency" value="false" />
+                                      <option name="length" value="61" />
+                                      <option name="offset" value="1823" />
+                                      <option name="placeholderDependency" />
+                                      <option name="placeholderText" value="Check if index if previous block +1 is index of current block" />
+                                      <option name="possibleAnswer" value="prev_block.index + 1 != cur_block.index" />
+                                      <option name="selected" value="false" />
+                                      <option name="status" value="Unchecked" />
+                                      <option name="studentAnswer" />
+                                      <option name="useLength" value="false" />
+                                    </AnswerPlaceholder>
+                                    <AnswerPlaceholder>
+                                      <option name="hints">
+                                        <list />
+                                      </option>
+                                      <option name="index" value="1" />
+                                      <option name="initialState" />
+                                      <option name="initializedFromDependency" value="false" />
+                                      <option name="length" value="68" />
+                                      <option name="offset" value="1951" />
+                                      <option name="placeholderDependency" />
+                                      <option name="placeholderText" value="Check if previous block's hash is equal to current block's prev_hash" />
+                                      <option name="possibleAnswer" value="prev_block.hash != cur_block.prev_hash" />
+                                      <option name="selected" value="false" />
+                                      <option name="status" value="Unchecked" />
+                                      <option name="studentAnswer" />
+                                      <option name="useLength" value="false" />
+                                    </AnswerPlaceholder>
+                                  </list>
+                                </option>
+                                <option name="highlightErrors" value="true" />
                                 <option name="trackChanges" value="true" />
                                 <option name="trackLengths" value="true" />
                                 <option name="userCreated" value="false" />

@@ -1,7 +1,7 @@
 from test_helper import run_common_tests, failed, passed, get_answer_placeholders
 
 
-answer_conditions = ["sync()", "block.index"]
+answer_conditions = ["list()", "load_from_dict(block_dict)" "is_valid(cur_block)", "append(cur_block)"]
 
 def test_answer_placeholders():
     placeholders = get_answer_placeholders()

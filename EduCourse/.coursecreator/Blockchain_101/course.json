@@ -1,7 +1,7 @@
 {
   "summary": "This course helps you create a blockchain. This would serve as an exercise to understand blockchains in a hands on fashion\nWe\u0027d be covering\na) Blocks\nb) Read/Write blocks\nc) View it using a micro web service\nd) Implement mining with the proof-of-work methodology\ne) Upgrade to blockchains\nf) Construct a node\ng) [WIP] transactions",
   "title": "Blockchain-101",
-  "programming_language": "Python",
+  "programming_language": "Python 2.7",
   "language": "en",
   "items": [
     {
@@ -13,14 +13,68 @@
           "name": "block_basics",
           "stepic_id": 0,
           "task_files": {
-            "__init__.py": {
-              "name": "__init__.py",
-              "text": "",
-              "placeholders": []
+            "task.py": {
+              "name": "task.py",
+              "text": "# This file creates the block structure\n# and writes the first file\n\nimport datetime\nimport os, json\n\nclass SimpleBlock(object):\n    def __init__(self,\n                 index\u003d0,\n                 timestamp\u003dNone,\n                 prev_hash\u003dNone,\n                 data\u003dNone,\n                 hash\u003dNone,\n                 nonce\u003d0):\n        self.index \u003d index\n\n        # to create a string from a bunch of different\n        # types of variables.\n        # The same as a str(timestamp), but cleaner\n        if timestamp is None:\n            # Ideally a block is created during mining\n            # and we will pass a value\n            # we don\u0027t need to use this except\n            # for the \"genesis\" block\n            self.timestamp \u003d \"{}\".format(\n                datetime.datetime.now()\n            )\n        # loading the hash\n        else:\n            self.timestamp\u003dtimestamp\n        self.prev_hash \u003d prev_hash\n        if not data:\n            self.data \u003d data\n        else:\n            self.data \u003d self.default_data(index)\n\n        if not hash:\n            self.hash \u003d self.stupid_hash\n        else:\n            self.hash \u003d hash\n\n        self.nonce \u003d nonce # We\u0027ll get back to this later\n\n    @property\n    def block(self):\n        \"\"\"\n        This is a property.\n        That means I don\u0027t have to call this as a function\n        it acts like a getter variable.\n        :return:\n        \"\"\"\n        return {\n            \"index\" : Type some index here,\n            \"timestamp\": What is my timestamp,\n            \"prev_hash\": What is the previous block hash,\n            \"data\": What is my data,\n            \"hash\": What is my current_hash,\n            \"nonce\": what is my nonce,\n        }\n\n    @property\n    def stupid_hash(self):\n        \"\"\"\n        Generate the hash over the current block\n\n        Parameters\n        ----------\n        nonce\n\n        Returns\n        -------\n\n        \"\"\"\n        return \"hash placeholder\"\n\n    @staticmethod\n    def default_data(index):\n        return \"I am in block {}\".format(index)\n\n    @staticmethod\n    def save(block_to_write, chaindata_dir):\n        filename \u003d \"{}.json\".format(block_to_write[\"index\"])\n        if not os.path.isabs(chaindata_dir):\n            my_dir \u003d os.path.dirname(__file__)\n            chaindata_dir \u003d os.path.join(\n                my_dir,\n                chaindata_dir\n            )\n        filename_abs \u003d os.path.join(\n            chaindata_dir,\n            filename\n        )\n        with open(filename_abs, \"w\") as f:\n            print \"Writing block with index : {} to {}\".format(\n                block_to_write[\"index\"],\n                filename_abs\n            )\n            f.write(\n                json.dumps(block_to_write, indent\u003d4, sort_keys\u003dTrue)\n            )\n\n        pass # do nothing for now\n\n    @classmethod\n    def load_from_dict(cls, dict_to_load):\n        if \"index\" not in dict_to_load:\n            dict_to_load[\"index\"] \u003d None\n        my_obj \u003d cls(\n            index \u003d dict_to_load[\u0027index\u0027],\n            timestamp\u003ddict_to_load[\u0027timestamp\u0027],\n            prev_hash\u003ddict_to_load[\u0027prev_hash\u0027],\n            hash\u003ddict_to_load[\u0027hash\u0027],\n            data\u003ddict_to_load[\u0027data\u0027],\n            nonce\u003ddict_to_load[\u0027nonce\u0027]\n        )\n        return my_obj\n\n    @staticmethod\n    def is_valid(block):\n        return True  # All blocks are valid. HAHAHAHAH\n\n    # to display some info when I say print my_block\n    def __str__(self):\n        return \"Block info \u003cprev_hash:{}\u003e , \u003cmy_hash:{}\u003e\".format(self.prev_hash,\n                                                                 self.hash)\n    def __repr__(self):\n        return \"Block info \u003cprev_hash:{}\u003e , \u003cmy_hash:{}\u003e\".format(self.prev_hash,\n                                                                 self.hash)\n    # To check equality\n    def __eq__(self, other):\n        return self.__dict__ \u003d\u003d other.__dict__\n\ndef prepare_folder(folder_chaindata\u003d\"chaindata\"):\n    if os.path.isabs(folder_chaindata):\n        folder_chaindata_abs \u003d folder_chaindata\n    else:\n        folder_here \u003dos.path.dirname(os.path.realpath(__file__))\n        folder_chaindata_abs \u003d os.path.join(folder_here, \"..\", folder_chaindata)\n\n    print \"Going to make the chaindata here\", folder_chaindata_abs\n    if not os.path.exists(folder_chaindata_abs):\n        os.mkdir(folder_chaindata_abs)\n\nif __name__ \u003d\u003d \u0027__main__\u0027:\n    # Some tests\n    prepare_folder(os.path.join(\"..\",\u0027chaindata\u0027))\n    test_block \u003d SimpleBlock(\n        index\u003d0,\n        data\u003d\"MY first block, woohoo\",\n        prev_hash \u003d None # Only the first block doesn\u0027t need prev_hash\n    )\n\n    print contents of test_block\n    test_block.save(test_block.block, os.path.join(\"..\",\"chaindata\"))\n",
+              "placeholders": [
+                {
+                  "offset": 1431,
+                  "length": 20,
+                  "hints": [
+                    "look at self.something"
+                  ],
+                  "possible_answer": "self.index",
+                  "placeholder_text": "Type some index here"
+                },
+                {
+                  "offset": 1478,
+                  "length": 20,
+                  "hints": [],
+                  "possible_answer": "self.timestamp",
+                  "placeholder_text": "What is my timestamp"
+                },
+                {
+                  "offset": 1525,
+                  "length": 31,
+                  "hints": [],
+                  "possible_answer": "self.prev_hash",
+                  "placeholder_text": "What is the previous block hash"
+                },
+                {
+                  "offset": 1578,
+                  "length": 15,
+                  "hints": [],
+                  "possible_answer": "self.data",
+                  "placeholder_text": "What is my data"
+                },
+                {
+                  "offset": 1615,
+                  "length": 23,
+                  "hints": [],
+                  "possible_answer": "self.hash",
+                  "placeholder_text": "What is my current_hash"
+                },
+                {
+                  "offset": 1661,
+                  "length": 16,
+                  "hints": [],
+                  "possible_answer": "self.nonce",
+                  "placeholder_text": "what is my nonce"
+                },
+                {
+                  "offset": 4563,
+                  "length": 22,
+                  "hints": [
+                    "test_block.something"
+                  ],
+                  "possible_answer": "test_block.block",
+                  "placeholder_text": "contents of test_block"
+                }
+              ]
             }
           },
           "test_files": {
-            "tests.py": "from test_helper import run_common_tests, failed, passed, get_answer_placeholders\n\n\ndef test_answer_placeholders():\n    placeholders \u003d get_answer_placeholders()\n    placeholder \u003d placeholders[0]\n    if placeholder \u003d\u003d \"\":       # TODO: your condition here\n        passed()\n    else:\n        failed()\n\n\nif __name__ \u003d\u003d \u0027__main__\u0027:\n    run_common_tests()\n    # test_answer_placeholders()       # TODO: uncomment test call\n\n\n"
+            "tests.py": "from test_helper import run_common_tests, failed, passed, get_answer_placeholders\n\n\nanswer_conditions \u003d [\"self.index\", \"self.timestamp\", \"self.prev_hash\", \"self.data\", \"self.hash\", \"self.nonce\",\n                     \"test_block.block\"]\n\ndef test_answer_placeholders():\n    placeholders \u003d get_answer_placeholders()\n    for placeholder,answer in zip(placeholders,answer_conditions):\n        if placeholder \u003d\u003d answer.lstrip().rstrip():       # TODO: your condition here\n            passed()\n        else:\n            print \"Expected\",answer\n            failed()\n\n\nif __name__ \u003d\u003d \u0027__main__\u0027:\n    run_common_tests()\n    test_answer_placeholders()\n\n\n"
           },
           "description_text": "\u003chtml\u003e\nLet\u0027s see how a simple block looks - pythonically\u003cbr /\u003e\nA block usually consists of the following :- \u003cbr /\u003e\n\u003cul\u003e\n    \u003cli\u003e\n        \u003cb\u003eSome data\u003c/b\u003e : In bitcoin, this is a message you can write along with your transaction \u003cbr /\u003e\n        For example : \"Home rent\" , \"Pizza\"\n    \u003c/li\u003e\n    \u003cli\u003e\n        \u003cb\u003e Hash of the previous block\u003c/b\u003e This is very important. This is what connects the blocks and says which\n        one is after which one. \u003ci\u003eThe only exception is the genesis block, i.e the first block\u003c/i\u003e\n    \u003c/li\u003e\n    \u003cli\u003e\n        \u003cb\u003eTimeStamp\u003c/b\u003e This allows you to decide which block was mined earlier. If two blocks were mined together,\n        the one that was mined earlier is accepted\n    \u003c/li\u003e\n    \u003cli\u003e\n        \u003cb\u003eOther Data\u003c/b\u003e Which include the index, nonce, and other stuff. We will come back to this later\n    \u003c/li\u003e\n\u003c/ul\u003e\n\n\n\u003c/html\u003e\n",
           "description_format": "html",
@@ -35,6 +89,89 @@
           "name": "block_syncing",
           "stepic_id": 0,
           "task_files": {
+            "task.py": {
+              "name": "task.py",
+              "text": "# lets read some blocks and do something on it\n\nfrom Session1_Fundamentals.block_basics.task import SimpleBlock\nimport json, os\n\n\ndef sync_local(cls\u003dSimpleBlock, chaindata_dir\u003d\u0027chaindata\u0027):\n    node_blocks \u003d What kind of data structure do we want this to have?\n    if not os.path.isabs(chaindata_dir):\n        folder_here \u003dos.path.dirname(os.path.realpath(__file__))\n        chaindata_dir \u003d os.path.join(folder_here, chaindata_dir)\n\n    # Lets scan the folder\n    for filename in os.listdir(chaindata_dir):\n        abs_filename \u003d os.path.join(\n            chaindata_dir,\n            filename\n        )\n        # looking for only the json files\n        if os.path.splitext(filename)[-1] \u003d\u003d \u0027.json\u0027:\n            with open(abs_filename, \"r\") as block_file:\n                block_dict \u003d json.load(block_file)\n                cur_block \u003d cls.We\u0027ve got the data in a dict from a json. Now load it as a block\n                # Just print a debug message for now\n                if cls.to_check_validity:\n                    node_blocks.Now add this block to our container of blocks\n                # Ideally we shouldn\u0027t update node_blocks if hash doesn\u0027t match\n\n    return node_blocks\n\ndef sync(cls\u003dSimpleBlock, chaindata_dir\u003dNone):\n    if chaindata_dir is None:\n        chaindata_dir \u003d os.path.join(\"..\", \"chaindata\")\n    return sync_local(\n        cls\u003dcls,\n        chaindata_dir\u003dchaindata_dir\n    )\n\nif __name__ \u003d\u003d \u0027__main__\u0027:\n    folder_chaindata \u003d os.path.join(\"..\", \"chaindata\")\n    peer_nodes \u003d sync(chaindata_dir\u003dfolder_chaindata,\n                      cls\u003dSimpleBlock)\n    print peer_nodes\n",
+              "placeholders": [
+                {
+                  "offset": 208,
+                  "length": 52,
+                  "hints": [
+                    "Something that we don\u0027t have to predefine the length. \nSomething we can add data to, like blocks\nSomething we can iterate over, block by block"
+                  ],
+                  "possible_answer": "list()",
+                  "placeholder_text": "What kind of data structure do we want this to have?"
+                },
+                {
+                  "offset": 837,
+                  "length": 64,
+                  "hints": [
+                    "You modified this function in the last task"
+                  ],
+                  "possible_answer": "load_from_dict(block_dict)",
+                  "placeholder_text": "We\u0027ve got the data in a dict from a json. Now load it as a block"
+                },
+                {
+                  "offset": 978,
+                  "length": 17,
+                  "hints": [
+                    "How do I check if the current block is a valid block?"
+                  ],
+                  "possible_answer": "is_valid(cur_block)",
+                  "placeholder_text": "to_check_validity"
+                },
+                {
+                  "offset": 1029,
+                  "length": 45,
+                  "hints": [
+                    "in c++ it\u0027s push_back,\nin python it is ..."
+                  ],
+                  "possible_answer": "append(cur_block)",
+                  "placeholder_text": "Now add this block to our container of blocks"
+                }
+              ]
+            }
+          },
+          "test_files": {
+            "tests.py": "from test_helper import run_common_tests, failed, passed, get_answer_placeholders\n\n\nanswer_conditions \u003d [\"list()\", \"load_from_dict(block_dict)\" \"is_valid(cur_block)\", \"append(cur_block)\"]\n\ndef test_answer_placeholders():\n    placeholders \u003d get_answer_placeholders()\n    for placeholder,answer in zip(placeholders,answer_conditions):\n        if placeholder \u003d\u003d answer.lstrip().rstrip():       # TODO: your condition here\n            passed()\n        else:\n            print \"Expected\",answer\n            failed()\n\n\nif __name__ \u003d\u003d \u0027__main__\u0027:\n    run_common_tests()\n    test_answer_placeholders()       # TODO: uncomment test call\n"
+          },
+          "description_text": "\u003chtml\u003e\nHere, we will learn how to load the blocks \u003cbr /\u003e\nAnd use whatever functions from simple blocks\n\u003cbr /\u003e\nCouple of salient points here (that you should think about) :- \u003cbr /\u003e\n\u003col\u003e\n    \u003cli\u003eWhy are we passing cls? Wouldn\u0027t it make sense to just pass SimpleBlock\u003c/li\u003e\n    \u003cli\u003eHow do we check if a node is valid?\u003c/li\u003e\n    \u003cli\u003eHow are our nodes collected?\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cbr\u003e\n\u003c/html\u003e\n",
+          "description_format": "html",
+          "additional_files": {},
+          "update_date": "Jan 1, 1970 1:00:00 AM",
+          "feedback_link": {
+            "link_type": "STEPIK"
+          },
+          "task_type": "edu"
+        },
+        {
+          "name": "block_broadcast",
+          "stepic_id": 0,
+          "task_files": {
+            "task.py": {
+              "name": "task.py",
+              "text": "from Session1_Fundamentals.block_syncing.task import sync\nfrom flask import Flask\nimport pprint\n\nnode \u003d Flask(__name__)\n\n\n@node.route(\u0027/blockchain\u0027, methods\u003d[\u0027GET\u0027])\ndef blockchain():\n    \"\"\"\n    Deplots our blockchain\n    Lists of json of hashes of block info \u003d\n    [index, timestamp, data, hash, prev_hash]\n    \"\"\"\n\n    node_blocks \u003d how do I get my node blocks\n\n    # Convert our blocks into dictionaries\n    blocks_to_show \u003d dict()\n\n    for block in node_blocks:\n        blocks_to_show[let\u0027s index our node_blocks by block index] \u003d block.block\n\n    return pprint.pformat(blocks_to_show)\n\n\nif __name__ \u003d\u003d \u0027__main__\u0027:\n    node.run()\n",
+              "placeholders": [
+                {
+                  "offset": 336,
+                  "length": 27,
+                  "hints": [
+                    "We\u0027ve imported something. \nPass with no parameters please xd"
+                  ],
+                  "possible_answer": "sync()",
+                  "placeholder_text": "how do I get my node blocks"
+                },
+                {
+                  "offset": 490,
+                  "length": 42,
+                  "hints": [
+                    "We use a dict this time, just for fun\nAlso easier to serialize a dict in python because it\u0027s already json-ish"
+                  ],
+                  "possible_answer": "block.index",
+                  "placeholder_text": "let\u0027s index our node_blocks by block index"
+                }
+              ]
+            },
             "__init__.py": {
               "name": "__init__.py",
               "text": "",
@@ -42,9 +179,115 @@
             }
           },
           "test_files": {
-            "tests.py": "from test_helper import run_common_tests, failed, passed, get_answer_placeholders\n\n\ndef test_answer_placeholders():\n    placeholders \u003d get_answer_placeholders()\n    placeholder \u003d placeholders[0]\n    if placeholder \u003d\u003d \"\":       # TODO: your condition here\n        passed()\n    else:\n        failed()\n\n\nif __name__ \u003d\u003d \u0027__main__\u0027:\n    run_common_tests()\n    # test_answer_placeholders()       # TODO: uncomment test call\n\n\n"
+            "tests.py": "from test_helper import run_common_tests, failed, passed, get_answer_placeholders\n\n\nanswer_conditions \u003d [\"sync()\", \"block.index\"]\n\ndef test_answer_placeholders():\n    placeholders \u003d get_answer_placeholders()\n    for placeholder,answer in zip(placeholders,answer_conditions):\n        if placeholder \u003d\u003d answer.lstrip().rstrip():       # TODO: your condition here\n            passed()\n        else:\n            print \"Expected\",answer\n            failed()\n\n\nif __name__ \u003d\u003d \u0027__main__\u0027:\n    run_common_tests()\n    test_answer_placeholders()       # TODO: uncomment test call\n"
           },
-          "description_text": "\u003chtml\u003e\nHere, we will learn how to load the blocks \u003cbr /\u003e\nAnd use whatever functions from simple blocks\n\u003cbr /\u003e\nCouple of salient points here (that you should think about) :- \u003cbr /\u003e\n\u003col\u003e\n    \u003cli\u003eWhy are we passing cls? Wouldn\u0027t it make sense to just pass SimpleBlock\u003c/li\u003e\n    \u003cli\u003eHow do we check if a node is valid?\u003c/li\u003e\n    \u003cli\u003eHow are our nodes collected?\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cbr\u003e\n\u003c/html\u003e\n",
+          "description_text": "\u003chtml\u003e\nThis task broadcasts everything in the chaindata folder\n\u003cbr\u003e\nWe use the \u003cb\u003eFlask\u003c/b\u003e Library to just hit up a very lightweight microservice.\n\u003cbr\u003e\nWe then load everything in the chaindata folder and serve it to a localhost:5000/blockchain\n\u003c/html\u003e\n",
+          "description_format": "html",
+          "additional_files": {},
+          "update_date": "Jan 1, 1970 1:00:00 AM",
+          "feedback_link": {
+            "link_type": "STEPIK"
+          },
+          "task_type": "edu"
+        },
+        {
+          "name": "block_mining",
+          "stepic_id": 0,
+          "task_files": {
+            "task.py": {
+              "name": "task.py",
+              "text": "# Lets do some mining\n# Import SimpleBlock that we created earlier and\n# lets extend it\nfrom Session1_Fundamentals.block_basics.task import SimpleBlock\nimport hashlib # we hash a bock\nimport datetime\nimport os\n\n# Imports to check test it out\nfrom Session1_Fundamentals.block_syncing.task import sync\n\nclass Block(SimpleBlock):\n\n    @property\n    def header(self):\n        \"\"\"\n        To generate a header from a string\n        It\u0027s just a concatenation of a bunc of things\n        This is a function that\u0027s used by hash(..) often\n\n        Parameters\n        ----------\n        nonce : int,\n            It\u0027s basically a counter\n            A counter which moves according to the mine function\n\n\n        Returns\n        -------\n        header : str,\n            Generates the text of the block header\n        \"\"\"\n        return \"{}{}{}{}{}\".format(\n            self.index,\n            self.prev_hash,\n            self.data,\n            self.timestamp,\n            self.nonce\n        )\n\n    def calculate_hash(self, nonce\u003d0):\n        self.nonce \u003d nonce\n        header_string \u003d self.header\n        # Let\u0027s choose something simple for now\n        sha_obj \u003d hashlib.sha256()\n        sha_obj.update(header_string.encode(\u0027utf-8\u0027))\n        return You got to return the hash in string format\n\n    def update_timestamp(self):\n        self.timestamp \u003d \"{}\".format(datetime.datetime.now())\n\n    def update_hash(self, hash):\n        self.hash \u003d hash\n\n    @staticmethod\n    def is_valid(block):\n        if block.index \u003d\u003d 0:\n            valid_flag \u003d True\n        elif block.hash \u003d\u003d block.calculate the hash of the block:\n            valid_flag \u003dTrue\n        else:\n            print \"Validity Condition not satisfied for \"\n            valid_flag \u003d False\n        return valid_flag\n\ndef difficulty_condition(hash_to_check):\n    NUM_ZEROS\u003d4\n    if Check if the first four elements of the hash are 0s:\n        return True\n    else:\n        return False\n\n# This should move to class Blockchain in the future\ndef mine(last_block, NUM_ZEROS\u003d4, data\u003dNone):\n    \"\"\"\n    Let\u0027s take the last block and it\u0027s hash\n    and mine the next block\n\n    Mining \u003d generating a hash, changing the nonce, till the\n             hash which hash NUM_ZEROS number of zeros\n    Parameters\n    ----------\n    last_block : Block or SimpleBlock,\n        previous block\n    NUM_ZEROS : int,\n        How many zeros do we want?\n\n    Returns\n    -------\n\n    \"\"\"\n    index \u003d int(last_block.index) + 1  # current block\u0027s index \u003d +1 of previous block\n    new_block \u003d Block(index\u003dindex, data\u003ddata, prev_hash\u003dlast_block.hash) # Default data for now\n    nonce \u003d 0\n    while True:\n        block_hash \u003d new_block.calculate_hash(nonce)\n        # print block_hash, nonce # for now, remove it later\n        if some_function_to_check_if_difficulty_is_alright(block_hash):\n            new_block.update_hash(block_hash)\n            ## WOHOO we cracked a good hash\n            # Also, the nonce got updated when we calculated the hash\n            break\n        else:\n            nonce +\u003d 1\n    return new_block\n\n# Guess why we have this function\n# Does sync get the blocks in order??\ndef get_last_block(all_blocks):\n    for block_now in all_blocks:\n        if int(block_now.index) \u003d\u003d len(all_blocks)-1:\n            return block_now\n\n\nif __name__ \u003d\u003d \u0027__main__\u0027:\n    # # Copy the folder chaindata outside the folder of Blocks\n    # folder_chaindata\u003dos.path.abspath(os.path.join(\n    #     os.path.dirname(os.path.realpath(__file__)),\n    #     \"..\",\n    #     \"chaindata\"\n    # ))\n    # Not yet!!\n    folder_chaindata \u003d os.path.join(\"..\",\"chaindata\")\n\n    blocks \u003d sync(\n        cls\u003dBlock,\n        chaindata_dir\u003dfolder_chaindata\n    )\n    last_block \u003d get_last_block(blocks)\n    new_block \u003d mine(last_block)\n    Block.save(new_block.block,folder_chaindata)\n    print Block.is_valid(new_block)\n\n",
+              "placeholders": [
+                {
+                  "offset": 1238,
+                  "length": 43,
+                  "hints": [
+                    "Got to digest the hash ;)"
+                  ],
+                  "possible_answer": "sha_obj.hexdigest()",
+                  "placeholder_text": "You got to return the hash in string format"
+                },
+                {
+                  "offset": 1572,
+                  "length": 31,
+                  "hints": [
+                    "important to pass the nonce param"
+                  ],
+                  "possible_answer": "calculate_hash(block.nonce)",
+                  "placeholder_text": "calculate the hash of the block"
+                },
+                {
+                  "offset": 1828,
+                  "length": 51,
+                  "hints": [
+                    "You can do this in many ways.\nForgive me for testing just one kind of way"
+                  ],
+                  "possible_answer": "str(hash_to_check)[0:NUM_ZEROS] \u003d\u003d \u00270\u0027*NUM_ZEROS",
+                  "placeholder_text": "Check if the first four elements of the hash are 0s"
+                },
+                {
+                  "offset": 2748,
+                  "length": 47,
+                  "hints": [
+                    "you know it"
+                  ],
+                  "possible_answer": "difficulty_condition",
+                  "placeholder_text": "some_function_to_check_if_difficulty_is_alright"
+                }
+              ]
+            },
+            "__init__.py": {
+              "name": "__init__.py",
+              "text": "",
+              "placeholders": []
+            }
+          },
+          "test_files": {
+            "tests.py": "from test_helper import run_common_tests, failed, passed, get_answer_placeholders\n\n\nanswer_conditions \u003d [\"sha_obj.hexdigest()\",\"calculate_hash(block.nonce)\", \"str(hash_to_check)[0:NUM_ZEROS] \u003d\u003d \u00270\u0027*NUM_ZEROS\",\n                     \"difficulty_condition\"]\n\ndef test_answer_placeholders():\n    placeholders \u003d get_answer_placeholders()\n    for placeholder,answer in zip(placeholders,answer_conditions):\n        if placeholder \u003d\u003d answer.lstrip().rstrip():       # TODO: your condition here\n            passed()\n        else:\n            print \"Expected\",answer\n            failed()\n\n\nif __name__ \u003d\u003d \u0027__main__\u0027:\n    run_common_tests()\n    test_answer_placeholders()       # TODO: uncomment test call\n"
+          },
+          "description_text": "\u003chtml\u003e\nHere, we try to do the actual mining \u003cbr\u003e\nWe use a proof-of-work mechanism \u003cbr\u003e\nIt works by taking a block and hashing it :-\n\u003col\u003e\n    \u003cli\u003e We use the SHA256 algorithm\u003c/li\u003e\n    \u003cli\u003e We need to get the hash as a string\u003c/li\u003e\n    \u003cli\u003e We check if this hash string has 4 zeros in the beginning\u003c/li\u003e\n    \u003cli\u003e if conditions are met, it is a valid block\u003c/li\u003e\n    \u003cli\u003e if not, we increment the nonce and try again, till infinity and beyond!\u003c/li\u003e\n\u003c/ol\u003e\n\u003c/html\u003e\n",
+          "description_format": "html",
+          "additional_files": {},
+          "update_date": "Jan 1, 1970 1:00:00 AM",
+          "feedback_link": {
+            "link_type": "STEPIK"
+          },
+          "task_type": "edu"
+        },
+        {
+          "name": "blockchain",
+          "stepic_id": 0,
+          "task_files": {
+            "task.py": {
+              "name": "task.py",
+              "text": "# TODO: type solution here\nfrom Session1_Fundamentals.block_mining.task import Block\nimport os\nimport json\n\nclass Blockchain(object):\n\n    def __init__(self, blocks):\n        assert blocks is None or isinstance(blocks, list)\n        # We want to only load blockchain with valid blocks\n        self.blocks \u003d [b for b in blocks if Block.is_valid(b)] or []\n        self.sort()\n\n    def sort(self):\n        self.blocks.sort(key\u003dlambda b: int(b.index))\n\n    # Just like block_2.sync\n    @classmethod\n    def load(cls, data_dir):\n        blocks \u003d []\n        if os.path.exists(data_dir):\n            for filename in os.listdir(data_dir):\n                if os.path.splitext(filename)[-1] \u003d\u003d \".json\":\n                    rel_path \u003d os.path.join(data_dir, filename)\n                    with open(rel_path, \u0027r\u0027) as block_file:\n                        block_info \u003d json.load(block_file)\n                        block \u003d Block.load_from_dict(block_info)\n\n                        # Check for block validity.\n                        # discarding all garbage\n                        if Block.is_valid(block):\n                            blocks.append(block)\n        return cls(blocks)\n\n    def is_valid(self):\n        \u0027\u0027\u0027\n        Got to check if chain is valid. By :-\n        1) Each block is indexed in order\n        2) prev_hash of each block \u003d hash of previous block\n        3) block\u0027s hash is valid --\u003e This has already been done in the loading\n            We assume our blockchain contains \"clean\" blocks\n        \u0027\u0027\u0027\n        for index in range(1,len(self)):\n            prev_block \u003d self.blocks[index - 1]\n            cur_block \u003d self.blocks[index]\n            # print (index)\n            # print (prev_block, cur_block)\n            # Check all three conditions\n            # print (prev_block.index, cur_block.index)\n\n            if Check if index if previous block +1 is index of current block:\n                print (\"Index dont match\")\n                return False\n            if Check if previous block\u0027s hash is equal to current block\u0027s prev_hash:\n                print \"Problematic Hash order in chain :\", (prev_block.hash, cur_block.hash)\n                return False\n        return True\n\n    def save(self, chaindata_dir):\n        for b in self.blocks:\n            Block.save(b, chaindata_dir\u003dchaindata_dir)\n        return True\n\n    # Does this make sense bro?\n    def find_block_by_index(self, index):\n        if len(self.blocks) \u003c\u003d index:\n            return self.blocks[index]\n        else:\n            return False\n\n    def find_block_by_hash(self, hash):\n        for b in self.blocks:\n            if b.hash \u003d\u003d hash:\n                return b\n        return False\n\n    def add_block(self, new_block):\n        if Block.is_valid(new_block):\n            new_block.index \u003d len(self)\n            self.blocks.append(new_block)\n        return True\n\n    def list_of_blocks(self):\n        return [b.block for b in self.blocks]\n\n    # Some operators\n    def __len__(self):\n        return len(self.blocks)\n\n    def __eq__(self, other):\n        return self.blocks \u003d\u003d other.blocks\n\n    def __gt__(self, other):\n        return len(self.blocks) \u003e len(other.blocks)\n\n    def __ge__(self, other):\n        return self.__eq__(other) or self.__gt__(other)\n\n\nif __name__ \u003d\u003d \"__main__\":\n    folder_chaindata\u003dos.path.abspath(os.path.join(\n        os.path.dirname(os.path.realpath(__file__)),\n        \"..\",\n        \"chaindata\"\n    ))\n    my_blockchain \u003d Blockchain.load(folder_chaindata)\n    other_blockchain \u003d Blockchain.load(folder_chaindata)\n    print my_blockchain \u003d\u003d other_blockchain\n\n    # Try to play around here.\n    # Delete the last block and add it\u0027s contents manually\n    # Then check if the block is valid\n\n    # Go back to the broadcast task and\n    # run it again and see what we have :)\n    print my_blockchain.is_valid()\n    pass\n",
+              "placeholders": [
+                {
+                  "offset": 1823,
+                  "length": 61,
+                  "hints": [],
+                  "possible_answer": "prev_block.index + 1 !\u003d cur_block.index",
+                  "placeholder_text": "Check if index if previous block +1 is index of current block"
+                },
+                {
+                  "offset": 1973,
+                  "length": 68,
+                  "hints": [],
+                  "possible_answer": "prev_block.hash !\u003d cur_block.prev_hash",
+                  "placeholder_text": "Check if previous block\u0027s hash is equal to current block\u0027s prev_hash"
+                }
+              ]
+            },
+            "__init__.py": {
+              "name": "__init__.py",
+              "text": "",
+              "placeholders": []
+            }
+          },
+          "test_files": {
+            "tests.py": "from test_helper import run_common_tests, failed, passed, get_answer_placeholders\n\n\nanswer_conditions \u003d [\"prev_block.index + 1 !\u003d cur_block.index\", \"prev_block.hash !\u003d cur_block.prev_hash\"]\n\ndef test_answer_placeholders():\n    placeholders \u003d get_answer_placeholders()\n    for placeholder,answer in zip(placeholders,answer_conditions):\n        if placeholder \u003d\u003d answer.lstrip().rstrip():       # TODO: your condition here\n            passed()\n        else:\n            print \"Expected\",answer\n            failed()\n\n\nif __name__ \u003d\u003d \u0027__main__\u0027:\n    run_common_tests()\n    test_answer_placeholders()       # TODO: uncomment test call\n"
+          },
+          "description_text": "\u003chtml\u003e\nHere we build a blockchain with all the building-blocks we have made\u003cbr\u003e\nThe blockchain is basically a list with some helper functions to make it easier to access it\u003cbr\u003e\nWe only load blocks whose hashes make sense, otherwise we would be loading  abunch of garbage too \u003cbr\u003e\nWe should have more checks here, but its a perfect place to start!\n\u003cbr\u003e\n\u003cbr\u003e\n\nI would strongly suggest you to play around with this class\n\u003col\u003e\n    \u003cli\u003eexplore your chaindata folder\u003c/li\u003e\n    \u003cli\u003eDelete some blocks and see what happens\u003c/li\u003e\n    \u003cli\u003eCan we use this class to make the first block?\u003c/li\u003e\n    \u003cli\u003eGo back to task 3 --\u003e broadcasting and see what happens in your browser!\u003c/li\u003e\n\u003c/ol\u003e,\n\u003c/html\u003e\n",
           "description_format": "html",
           "additional_files": {},
           "update_date": "Jan 1, 1970 1:00:00 AM",
@@ -68,10 +311,16 @@
           "test_files": {},
           "description_format": "html",
           "additional_files": {
+            "Session1_Fundamentals/block_syncing/__init__.py": "",
             "requirements.txt": "flask\n",
-            "Session1_Fundamentals/block_basics/chaindata/0.json": "{\n    \"data\": \"I am in block 0\", \n    \"hash\": \"hash placeholder\", \n    \"index\": 0, \n    \"nonce\": 0, \n    \"prev_hash\": null, \n    \"timestamp\": \"2018-09-18 12:10:58.027913\"\n}",
+            "Session1_Fundamentals/chaindata/0.json": "{\n    \"data\": \"I am in block 0\", \n    \"hash\": \"hash placeholder\", \n    \"index\": 0, \n    \"nonce\": 0, \n    \"prev_hash\": null, \n    \"timestamp\": \"2018-09-18 16:14:22.912362\"\n}",
+            "Session1_Fundamentals/block_basics/__init__.py": "",
+            "Session1_Fundamentals/chaindata/3.json": "{\n    \"data\": null, \n    \"hash\": \"000027d347f862eb3c35dfe4079cb29c6b09fb4091de4ce0e2d8fb72be239102\", \n    \"index\": 3, \n    \"nonce\": 3282, \n    \"prev_hash\": \"0000fb6efa513565287d991bf1d0328b6acafe379626e815de7b39e6e68e839c\", \n    \"timestamp\": \"2018-09-18 15:44:53.639263\"\n}",
             "test_helper.py": "import sys\n\n\ndef get_file_text(path):\n    \"\"\" Returns file text by path\"\"\"\n    file_io \u003d open(path, \"r\")\n    text \u003d file_io.read()\n    file_io.close()\n    return text\n\n\ndef get_file_output(encoding\u003d\"utf-8\", path\u003dsys.argv[-1], arg_string\u003d\"\"):\n    \"\"\"\n    Returns answer file output\n    :param encoding: to decode output in python3\n    :param path: path of file to execute\n    :return: list of strings\n    \"\"\"\n    import subprocess\n\n    proc \u003d subprocess.Popen([sys.executable, path], stdin\u003dsubprocess.PIPE, stdout\u003dsubprocess.PIPE,\n                            stderr\u003dsubprocess.STDOUT)\n    if arg_string:\n        for arg in arg_string.split(\"\\n\"):\n            proc.stdin.write(bytearray(str(arg) + \"\\n\", encoding))\n            proc.stdin.flush()\n\n    return list(map(lambda x: str(x.decode(encoding)), proc.communicate()[0].splitlines()))\n\n\ndef test_file_importable():\n    \"\"\" Tests there is no obvious syntax errors\"\"\"\n    path \u003d sys.argv[-1]\n    if not path.endswith(\".py\"):\n        import os\n\n        parent \u003d os.path.abspath(os.path.join(path, os.pardir))\n        python_files \u003d [f for f in os.listdir(parent) if os.path.isfile(os.path.join(parent, f)) and f.endswith(\".py\")]\n        for python_file in python_files:\n            if python_file \u003d\u003d \"tests.py\":\n                continue\n            check_importable_path(os.path.join(parent, python_file))\n        return\n    check_importable_path(path)\n\n\ndef check_importable_path(path):\n    \"\"\" Checks that file is importable.\n        Reports failure otherwise.\n    \"\"\"\n    saved_input \u003d patch_input()\n    try:\n        import_file(path)\n    except:\n        failed(\"The file contains syntax errors\", test_file_importable.__name__)\n        return\n    finally:\n        revert_input(saved_input)\n\n    passed(test_file_importable.__name__)\n\n\ndef patch_input():\n    def mock_fun(_m\u003d\"\"):\n        return \"mock\"\n\n    if sys.version_info[0] \u003d\u003d 3:\n        import builtins\n        save_input \u003d builtins.input\n        builtins.input \u003d mock_fun\n        return save_input\n    elif sys.version_info[0] \u003d\u003d 2:\n        import __builtin__\n        save_input \u003d __builtin__.raw_input\n        __builtin__.raw_input \u003d mock_fun\n        __builtin__.input \u003d mock_fun\n        return save_input\n\n\ndef revert_input(saved_input):\n    if sys.version_info[0] \u003d\u003d 3:\n        import builtins\n        builtins.input \u003d saved_input\n    elif sys.version_info[0] \u003d\u003d 2:\n        import __builtin__\n        __builtin__.raw_input \u003d saved_input\n        __builtin__.input \u003d saved_input\n\n\ndef import_file(path):\n    \"\"\" Returns imported file \"\"\"\n    if sys.version_info[0] \u003d\u003d 2 or sys.version_info[1] \u003c 3:\n        import imp\n\n        return imp.load_source(\"tmp\", path)\n    elif sys.version_info[0] \u003d\u003d 3:\n        import importlib.machinery\n\n        return importlib.machinery.SourceFileLoader(\"tmp\", path).load_module(\"tmp\")\n\n\ndef import_task_file():\n    \"\"\" Returns imported file.\n        Imports file from which check action was run\n    \"\"\"\n    path \u003d sys.argv[-1]\n    return import_file(path)\n\n\ndef test_is_not_empty():\n    \"\"\"\n        Checks that file is not empty\n    \"\"\"\n    path \u003d sys.argv[-1]\n    file_text \u003d get_file_text(path)\n\n    if len(file_text) \u003e 0:\n        passed()\n    else:\n        failed(\"The file is empty. Please, reload the task and try again.\")\n\n\ndef test_text_equals(text, error_text):\n    \"\"\"\n        Checks that answer equals text.\n    \"\"\"\n    path \u003d sys.argv[-1]\n    file_text \u003d get_file_text(path)\n\n    if file_text.strip() \u003d\u003d text:\n        passed()\n    else:\n        failed(error_text)\n\n\ndef test_answer_placeholders_text_deleted(error_text\u003d\"Don\u0027t just delete task text\"):\n    \"\"\"\n        Checks that all answer placeholders are not empty\n    \"\"\"\n    windows \u003d get_answer_placeholders()\n\n    for window in windows:\n        if len(window) \u003d\u003d 0:\n            failed(error_text)\n            return\n    passed()\n\n\ndef set_congratulation_message(message):\n    \"\"\" Overrides default \u0027Congratulations!\u0027 message \"\"\"\n    print(\"#educational_plugin CONGRATS_MESSAGE \" + message)\n\n\ndef failed(message\u003d\"Please, reload the task and try again.\", name\u003dNone):\n    \"\"\" Reports failure \"\"\"\n    if not name:\n        name \u003d sys._getframe().f_back.f_code.co_name\n    print(\"#educational_plugin \" + name + \" FAILED + \" + message)\n\n\ndef passed(name\u003dNone):\n    \"\"\" Reports success \"\"\"\n    if not name:\n        name \u003d sys._getframe().f_back.f_code.co_name\n    print(\"#educational_plugin \" + name + \" test OK\")\n\n\ndef get_answer_placeholders():\n    \"\"\"\n        Returns all answer placeholders text\n    \"\"\"\n    prefix \u003d \"#educational_plugin_window \u003d \"\n    path \u003d sys.argv[-1]\n    import os\n\n    file_name_without_extension \u003d os.path.splitext(path)[0]\n    windows_path \u003d file_name_without_extension + \"_windows\"\n    windows \u003d []\n    f \u003d open(windows_path, \"r\")\n    window_text \u003d \"\"\n    first \u003d True\n    for line in f.readlines():\n        if line.startswith(prefix):\n            if not first:\n                windows.append(window_text.strip())\n            else:\n                first \u003d False\n            window_text \u003d line[len(prefix):]\n        else:\n            window_text +\u003d line\n\n    if window_text:\n        windows.append(window_text.strip())\n\n    f.close()\n    return windows\n\n\ndef check_samples(samples\u003d()):\n    \"\"\"\n      Check script output for all samples. Sample is a two element list, where the first is input and\n      the second is output.\n    \"\"\"\n    for sample in samples:\n        if len(sample) \u003d\u003d 2:\n            output \u003d get_file_output(arg_string\u003dstr(sample[0]))\n            if \"\\n\".join(output) !\u003d sample[1]:\n                failed(\n                    \"Test from samples failed: \\n \\n\"\n                    \"Input:\\n{}\"\n                    \"\\n \\n\"\n                    \"Expected:\\n{}\"\n                    \"\\n \\n\"\n                    \"Your result:\\n{}\".format(str.strip(sample[0]), str.strip(sample[1]), \"\\n\".join(output)))\n                return\n        set_congratulation_message(\"All test from samples passed. Now we are checking your solution on Stepik server.\")\n\n    passed()\n\n\ndef run_common_tests(error_text\u003d\"Please, reload file and try again\"):\n    test_is_not_empty()\n    test_answer_placeholders_text_deleted()\n    test_file_importable()\n",
-            "Session1_Fundamentals/__init__.py": ""
+            "Session1_Fundamentals/chaindata/2.json": "{\n    \"data\": null, \n    \"hash\": \"0000fb6efa513565287d991bf1d0328b6acafe379626e815de7b39e6e68e839c\", \n    \"index\": 2, \n    \"nonce\": 72574, \n    \"prev_hash\": \"0000046213531b498a5ca5d675f6ef2a43852e874ef369ff5f7fea9b10e9c533\", \n    \"timestamp\": \"2018-09-18 15:44:52.188891\"\n}",
+            "Session1_Fundamentals/chaindata/4.json": "{\n    \"data\": null, \n    \"hash\": \"0000c709c8507d9292424cc954caccb2e17bc681030ecab2a554841889128d01\", \n    \"index\": 4, \n    \"nonce\": 6574, \n    \"prev_hash\": \"000027d347f862eb3c35dfe4079cb29c6b09fb4091de4ce0e2d8fb72be239102\", \n    \"timestamp\": \"2018-09-18 15:44:54.494188\"\n}",
+            "Session1_Fundamentals/__init__.py": "",
+            "Session1_Fundamentals/chaindata/1.json": "{\n    \"data\": null, \n    \"hash\": \"0000046213531b498a5ca5d675f6ef2a43852e874ef369ff5f7fea9b10e9c533\", \n    \"index\": 1, \n    \"nonce\": 7079, \n    \"prev_hash\": \"hash placeholder\", \n    \"timestamp\": \"2018-09-18 15:33:23.226714\"\n}"
           },
           "update_date": "Jan 1, 1970 1:00:00 AM",
           "feedback_link": {
